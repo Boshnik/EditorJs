@@ -1,0 +1,25 @@
+{
+  "name": "boshnik/editorjs",
+  "description": "EditorJs",
+  "authors": [
+    {
+      "name": "Aleksandr Huz",
+      "email": "Superboshnik@gmail.com",
+      "homepage": "https://github.com/Boshnik"
+    }
+  ],
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=7.2.5"
+  },
+  "config": {
+    "platform": {
+      "php": "7.2.5"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Boshnik\\EditorJs\\": "src/"
+    }
+  }
+}

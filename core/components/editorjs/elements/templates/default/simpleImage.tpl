@@ -1,0 +1,1 @@
+<img loading="lazy" src="{$url}" alt="{$caption}">

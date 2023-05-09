@@ -1,0 +1,1 @@
+<h{$level}>{if $anchor}<a href="#{$anchor}"></a>{/if}{$text}</h{$level}>

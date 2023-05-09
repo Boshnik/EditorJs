@@ -1,0 +1,42 @@
+.ce-block__content,
+.ce-toolbar__content {
+    margin: 0;
+    padding: 0 60px;
+}
+.ce-toolbar__actions {
+    left: 0;
+    right: auto;
+}
+.ce-editorjsColumns_wrapper .ce-toolbar__actions {
+    left: auto;
+}
+#x-form-el-ta {
+    display: none !important;
+}
+.ce-header {
+    font-weight: bold;
+}
+h1.ce-header {
+    font-size: 2em;
+}
+h2.ce-header {
+    font-size: 1.5em;
+}
+h3.ce-header {
+    font-size: 1.17em;
+}
+h4.ce-header {
+    font-size: 1em;
+}
+h5.ce-header {
+    font-size: 0.83em;
+}
+h6.ce-header {
+    font-size: 0.67em;
+}
+.ce-editorjsColumns_col {
+    border: 1px solid #ccc;
+}
+.ce-editorjsColumns_col .ce-block__content {
+
+}
