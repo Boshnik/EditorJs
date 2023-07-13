@@ -3,21 +3,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 set_time_limit(0);
 
-//use MODX\Revolution\modX;
-//use MODX\Revolution\Error\modError;
-//use MODX\Revolution\Transport\modPackageBuilder;
-//use MODX\Revolution\Transport\modTransportPackage;
-//use MODX\Revolution\modCategory;
-//use MODX\Revolution\modSystemSetting;
-//use MODX\Revolution\modMenu;
-//use MODX\Revolution\modDashboardWidget;
-//use MODX\Revolution\modPlugin;
-//use MODX\Revolution\modPluginEvent;
-//use MODX\Revolution\modSnippet;
-//use MODX\Revolution\modChunk;
-//use MODX\Revolution\modTemplate;
-//use MODX\Revolution\modResource;
-
 class EditorJsPackage
 {
     /** @var modX $modx */

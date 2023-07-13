@@ -5,10 +5,9 @@ return [
         'file' => 'editorjs',
         'description' => '',
         'events' => [
-            'OnMODXInit' => [],
             'OnDocFormPrerender' => [],
-            'OnHandleRequest' => [],
             'OnRichTextEditorRegister' => [],
+            'OnBeforeDocFormSave' => [],
         ],
     ],
 ];
