@@ -1,2 +1,4 @@
 .idea
-config.core.php
+/core/components/editorjs/vendor/
+/_build/resolvers/symlinks.php
+pass.txt
