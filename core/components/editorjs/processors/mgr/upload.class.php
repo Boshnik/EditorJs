@@ -39,7 +39,7 @@ class EditorJsFileUploadProcessor extends modProcessor {
 
         $path = preg_replace('/[\.]{2,}/', '', htmlspecialchars($this->getProperty('path')));
         if (empty($path)) {
-            $path = $this->modx->getOption('editorjs_source_path');
+            $path = $this->modx->getOption('editorjs_source_path', null, '/', true);
         }
         $path = ltrim($path, '/');
         $this->source->createContainer($path, '/');
@@ -62,9 +62,12 @@ class EditorJsFileUploadProcessor extends modProcessor {
         }
 
         $source_url = $this->source->getBaseUrl();
-        $url = "{$source_url}{$path}{$filename}";
+        if ($this->getProperty('modxversion') == 3) {
+            $filename = $this->modx->filterPathSegment($filename);
+        }
+
         return $this->success('', [
-            'url' => $url,
+            'url' => "{$source_url}{$path}{$filename}",
             'title' => $filetitle,
             'name' => $filename,
             'size' => $filesize,
@@ -79,7 +82,7 @@ class EditorJsFileUploadProcessor extends modProcessor {
      */
     public function getSource() {
         $this->modx->loadClass('sources.modMediaSource');
-        $this->source = modMediaSource::getDefaultSource($this->modx,$this->getProperty('source'));
+        $this->source = modMediaSource::getDefaultSource($this->modx, $this->getProperty('source'));
         if (empty($this->source) || !$this->source->getWorkingContext()) {
             return false;
         }

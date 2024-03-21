@@ -3,9 +3,13 @@
 namespace Boshnik\EditorJs;
 
 use modX;
-use PDO;
+use MODX\Revolution\Smarty\modSmarty;
 
-require_once MODX_CORE_PATH . 'model/modx/smarty/modsmarty.class.php';
+$modsmarty = MODX_CORE_PATH . 'model/modx/smarty/modsmarty.class.php';
+if (file_exists($modsmarty)) {
+    require_once $modsmarty;
+}
+
 
 /**
  * class EditorJs
@@ -22,16 +26,15 @@ class EditorJs
     public $namespace = 'editorjs';
 
     /**
-     * The package name
-     * @var string $packageName
-     */
-    public $packageName = 'EditorJs';
-
-    /**
      * The version
      * @var string $version
      */
-    public $version = '1.0.0';
+    public $version = '1.0.2';
+
+    /**
+     * @var \modSmarty $smarty
+     */
+    public $smarty;
 
     /**
      * The class config
@@ -121,12 +124,26 @@ class EditorJs
     public function fetchTemplate($tpl, $data)
     {
         $templatePath = MODX_BASE_PATH . ($this->config['templates_custom'] ?: $this->config['templates']);
-        $this->modx->smarty = new \modSmarty($this->modx);
-        $this->modx->smarty->setTemplatePath($templatePath);
+        if (!$this->smarty) {
+            $this->smarty = $this->getSmarty();
+        }
+        $this->smarty->setTemplatePath($templatePath);
         $this->setPlaceholders($data);
         $this->setPlaceholder('modx', $this->modx);
 
-        return $this->modx->smarty->fetch($tpl.'.tpl');
+        return $this->smarty->fetch($tpl.'.tpl');
+    }
+
+    /**
+     * @return modSmarty
+     */
+    public function getSmarty()
+    {
+        if ($this->config['modxversion'] == 3) {
+            return new \MODX\Revolution\Smarty\modSmarty($this->modx);
+        }
+
+        return new \modSmarty($this->modx);
     }
 
     /**
@@ -145,7 +162,7 @@ class EditorJs
      */
     public function setPlaceholder($k,$v) {
         $this->placeholders[$k] = $v;
-        $this->modx->smarty->assign($k,$v);
+        $this->smarty->assign($k,$v);
     }
 
 }

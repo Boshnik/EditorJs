@@ -12,12 +12,12 @@ class OnDocFormPrerender extends Event
 
         /** @var \modResource $resource */
         $resource = $this->scriptProperties['resource'];
-        if (!$resource) {
+        if (!$resource || !$resource->richtext) {
             return false;
         }
 
         $which_editor = $this->modx->getOption('which_editor');
-        if (!$resource->richtext || $which_editor !== 'EditorJs') {
+        if ($which_editor !== 'EditorJs') {
             return false;
         }
 
@@ -41,7 +41,7 @@ class OnDocFormPrerender extends Event
             // https://github.com/editor-js/simple-image
             // 'simple-image' => 'https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest',
             // https://github.com/editor-js/image
-            'image' => 'https://cdn.jsdelivr.net/npm/@editorjs/image/dist/bundle.min.js',
+            'image' => 'https://cdn.jsdelivr.net/npm/@editorjs/image@latest',
             // https://github.com/editor-js/nested-list
             'list' => 'https://cdn.jsdelivr.net/npm/@editorjs/nested-list@latest',
             // https://github.com/editor-js/checklist
@@ -102,15 +102,15 @@ class OnDocFormPrerender extends Event
             $this->modx->controller->addJavascript($url);
         }
 
-        $resource->content = trim($resource->content, '<p>,</p>');
+//        $resource->content = trim($resource->content, '<p>,</p>');
 
         $config = $this->editorjs->config;
         $this->modx->controller->addHtml('<script>
             Ext.onReady(() => {
                 window.EditorJs = {};
                 EditorJs.config = ' . json_encode($config) . ';
-                EditorJs.content = ' . json_encode($resource->content) . ';
-                EditorJs.resource_id = ' . $resource->id . ';
+                EditorJs.resource = ' . json_encode($resource->toArray()) . ';
+                window.dispatchEvent(new CustomEvent("EditorJsLoad"));
             });
         </script>');
     }
