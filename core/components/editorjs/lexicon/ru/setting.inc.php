@@ -9,5 +9,5 @@ $_lang['setting_editorjs_templates_url'] = 'Шаблоны (по умолчан�
 $_lang['setting_editorjs_templates_url_desc'] = 'Путь к шаблонам .tpl';
 
 $_lang['setting_editorjs_templates_custom_url'] = 'Пользовательские шаблоны';
-$_lang['setting_editorjs_templates_custom_url_desc'] = 'Если шаблон отсутсвует, то будет выбран шаблоны по умолчанию';
+$_lang['setting_editorjs_templates_custom_url_desc'] = 'Если шаблон отсутствует, то будет выбран шаблоны по умолчанию';
 $_lang['setting_editorjs_image_path_desc'] = '{resource_id} - id ресурса';
