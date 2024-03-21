@@ -33,7 +33,7 @@ window.addEventListener('EditorJsLoad', () => {
             });
     };
 
-    EditorJs.content = function(id, content, editorContent) {
+    EditorJs.content = function(id, editorJson, editorContent) {
         const editor = new EditorJS({
             holder: id,
             tools: {
@@ -209,7 +209,7 @@ window.addEventListener('EditorJsLoad', () => {
             },
 
             placeholder: MODx.config.editorjs_placeholder,
-            data: content,
+            data: editorJson,
             onReady: () => {
                 console.log('Editor.js is ready to work!');
                 new DragDrop(editor);
@@ -224,16 +224,20 @@ window.addEventListener('EditorJsLoad', () => {
         });
 
         return editor;
+    };
+
+    MODx.loadRTE = function (id, json, content) {
+        EditorJs.content(id, json, content);
     }
 
     const editorContent = document.querySelector('[name="ta"]');
     if (editorContent) {
-        const content = EditorJs.resource.properties?.editorjs || {};
-        if (Object.entries(content).length) {
-            editorContent.value = JSON.stringify(content);
+        const editorJson = EditorJs.resource.properties?.editorjs || {};
+        if (Object.entries(editorJson).length) {
+            editorContent.value = JSON.stringify(editorJson);
         }
 
-        EditorJs.content('modx-content-below', content, editorContent);
+        MODx.loadRTE('modx-content-below', editorJson, editorContent);
     }
 
 });
