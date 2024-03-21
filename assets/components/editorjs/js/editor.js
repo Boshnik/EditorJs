@@ -214,7 +214,7 @@ window.addEventListener('EditorJsLoad', () => {
                 console.log('Editor.js is ready to work!');
                 new DragDrop(editor);
             },
-            onChange: (api, event) => {
+            onChange: () => {
                 editor.save().then((outputData) => {
                     editorContent.value = JSON.stringify(outputData);
                 }).catch((error) => {
